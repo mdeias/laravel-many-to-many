@@ -13,8 +13,9 @@
             <thead>
               <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Categoria</th>
                 <th scope="col">Titolo</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Tags</th>
                 <th scope="col">Contenuto</th>
               </tr>
             </thead>
@@ -30,6 +31,14 @@
                     @else
                        <td>-----</td>
                     @endif
+                    <td>
+                      @forelse ($post->tags as $tag)
+                      <span class="badge bg-success">{{$tag->name}}</span>
+                      @empty
+                        ------
+                      @endforelse
+
+                    </td>
                     <td><a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">SHOW</a></td>
                     <td><a class="btn btn-success" href="{{ route('admin.posts.edit', $post) }}">EDIT</a></td>
                     <td>
@@ -46,16 +55,7 @@
           </table>
           {{ $posts->links() }}
 
-          @foreach ($categories as $category)
-            <h3>{{$category->name}}</h3>
-            <ul>
-              @foreach ($category->posts as $post_category)
-                <li>
-                  <a href="{{ route('admin.posts.show', $post_category) }}">{{$post_category->title}}</a>
-                </li>
-              @endforeach
-            </ul>
-          @endforeach
+          
     </div>
 </div>
 @endsection

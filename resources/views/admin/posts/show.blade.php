@@ -10,6 +10,12 @@
             
         @endif
 
+        @forelse ($post->tags as $tag)
+            <span class="badge bg-success">{{$tag->name}}</span>
+        @empty
+            
+        @endforelse
+
         <p>{{ $post->content }}</p>
         <a href="{{route('admin.posts.edit', $post)}}" class="btn btn-success">EDIT</a>     
         <form class="d-inline" onsubmit=" return confirm('Confermi di voler eliminare {{$post->title}}?') " action="{{route('admin.posts.destroy', $post)}}" method="POST">
